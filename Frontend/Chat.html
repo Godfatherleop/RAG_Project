@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Citrus Disease Detection</title>
+    <link rel="stylesheet" href="design.css">
+    
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Citrus Disease Detection</h1>
+        <p>Using AI to Keep Your Crops Healthy</p>
+    </header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="Diseases.html">Citrus Diseases</a></li>
+            <li><a href="us.html">About Us</a></li>
+            <li><a href="Chat.html">Ask Citra</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- Main Content Section -->
+    <head>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    #chat-container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+    }
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .message {
+      margin: 10px 0;
+    }
+    .user {
+      text-align: right;
+    }
+    .bot {
+      text-align: left;
+    }
+    .bubble {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 15px;
+      max-width: 70%;
+    }
+    .user .bubble {
+      background: #cce5ff;
+    }
+    .bot .bubble {
+      background: #e2e3e5;
+    }
+    #input-area {
+      display: flex;
+    }
+    #input-area input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px 0 0 5px;
+      border: 1px solid #ccc;
+    }
+    #input-area button {
+      padding: 10px 20px;
+      border: none;
+      background: #007bff;
+      color: white;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+    <div id="header" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100px;">
+    <h1 style="margin: 0;">Citra</h1>
+    <h3 style="margin: 0; color: rgb(16, 16, 16);">Your Virtual Assistant</h3>
+  </div>
+  <div id="chat-container">
+    <div id="chat-box"></div>
+    <div id="input-area">
+      <input type="text" id="user-input" placeholder="Type your message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+
+    function appendMessage(sender, text) {
+      const msgDiv = document.createElement("div");
+      msgDiv.classList.add("message", sender);
+      msgDiv.innerHTML = `<div class="bubble">${text}</div>`;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage("user", message);
+      input.value = "";
+
+      try {
+        
+        const response = await fetch("http://rag-backend:8000/chatbot/chatbotresponse", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ prompt: message })
+        });
+
+        const data = await response.json();
+        appendMessage("bot", data.response || "No answer received.");
+      } catch (err) {
+        appendMessage("bot", "Error: Could not reach the backend.");
+      }
+    }
+  </script>
+</body>
+    <!-- Footer Section -->
+    <footer>
+        <p>Major Project by: </p>
+        <p>Prahlad Acharya, Rijan Pokhrel, Sakar Dahal & Vishal Sigdel</p>
+        <p>Under Supervision of</p>
+        <p>Er. Rituraj Lamsal sir</p>
+        <p>© 2024 Citrus Detection Project</p>
+    </footer>
+</body>
+
+</html>
+
+
+
+

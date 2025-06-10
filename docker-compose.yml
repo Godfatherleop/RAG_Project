@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  rag-backend:
+    image: backend  
+    container_name: rag-backend
+    ports:
+      - "8000:8000"  
+    networks:
+      - rag-network
+
+  rag-frontend:
+      build: frontend
+      container_name: rag-frontend
+      ports:
+        - "8080:80"
+      networks:
+        - rag-network
+
+networks:
+  rag-network:
+    driver: bridge
