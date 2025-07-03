@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   rag-backend:
-    build: backend  
+    build: MajorProject  
     container_name: rag-backend
     ports:
       - "8000:8000"  
@@ -10,7 +10,7 @@ services:
       - rag-network
 
   rag-frontend:
-      build: frontend
+      build: Frontend
       container_name: rag-frontend
       ports:
         - "8080:80"
