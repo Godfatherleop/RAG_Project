@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   rag-backend:
-    image: backend  
+    build: backend  
     container_name: rag-backend
     ports:
       - "8000:8000"  
