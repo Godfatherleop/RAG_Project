@@ -13,7 +13,7 @@ services:
       image: prahlad8ac/frontend:latest
       container_name: rag-frontend
       ports:
-        - "8080:80"
+        - "80:80"
       networks:
         - rag-network
 
