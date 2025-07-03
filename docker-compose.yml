@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   rag-backend:
-    image: prahlad8ac/backend:latest
+    image: prahlad8ac/backend:v1.0.4 
     container_name: rag-backend
     ports:
       - "8000:8000"  
